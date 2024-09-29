@@ -1,0 +1,355 @@
+body {
+	font-family: Arial, sans-serif;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+}
+
+#word-list {
+	margin-bottom: 20px;
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    padding: 4px 1.5rem;
+}
+
+.word {
+	display: inline-block;
+	padding: 10px 15px;
+	margin: 5px;
+	background-color: #f0f0f0;
+	cursor: grab;
+	border-radius: 5px;
+	user-select: none;
+	transition: background-color 0.3s;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.word:active {
+	cursor: grabbing;
+}
+
+#venn-diagram {
+	display: inline-block;
+	position: relative;
+}
+
+#venn-diagram {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+#diagram-container {
+	position: relative;
+	width: 90%;
+	height: 100%;
+}
+
+.dropped-word {
+	position: absolute;
+	font-weight: bold;
+	/* Ensure transforms are not affecting position */
+}
+
+#venn-diagram svg {
+	width: 100%;
+	height: 100%;
+	overflow: initial;
+}
+
+.region {
+	fill: #d9d9d9;
+	stroke: #000000; /* Border color */
+	stroke-width: 2; /* Border thickness */
+	cursor: pointer;
+	transition: fill 0.3s, stroke 0.3s;
+}
+
+.dropped-word {
+	position: absolute;
+	font-weight: bold;
+	/*     pointer-events: none; */
+}
+
+#reset-button,
+#undo-button,
+#hint-button, #config-submit {
+	padding: 10px 20px;
+	margin: 20px 0px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+#hint-button {
+	border: 0.5px solid black;
+	border-radius: 4px;
+}
+
+#undo-button {
+	border: 0.5px solid black;
+	border-radius: 4px;
+}
+
+#reset-button {
+	background: linear-gradient(45deg, #dc3545, #c82333);
+	color: white;
+	border: none;
+	border: 0.5px solid transparent;
+	border-radius: 4px;
+}
+
+#buttons {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+/* Existing CSS styles... */
+
+#region1 {
+	fill: #ff9999; /* Light Red */
+}
+
+#region2 {
+	fill: #99ff99; /* Light Green */
+}
+
+#region3 {
+	fill: #9999ff; /* Light Blue */
+}
+
+#region4 {
+	fill: #ffff99; /* Light Yellow */
+}
+
+#region5 {
+	fill: #ff99ff; /* Light Pink */
+}
+
+#region6 {
+	fill: #99ffff; /* Light Cyan */
+}
+
+#region7 {
+	fill: #ffcc99; /* Light Orange */
+}
+
+.region:hover {
+	fill: #a1c4fd !important;
+	stroke: #007bff; /* Optional: Change border color on hover */
+}
+
+/* JSON Upload Styles */
+#json-upload {
+	margin-top: 30px;
+}
+
+#json-upload h2 {
+	color: #555555;
+}
+
+#json-upload input[type='file'] {
+	display: block;
+	margin: 10px auto;
+}
+
+#json-upload button {
+	display: block;
+	padding: 10px 20px;
+	background-color: #17a2b8;
+	color: #ffffff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+    width: 100%;
+}
+
+#json-upload button:hover {
+	background-color: #138496;
+}
+
+#upload-message {
+	text-align: center;
+	color: #dc3545;
+	min-height: 20px;
+}
+
+/* Saved Games Styles */
+#saved-games {
+	margin-top: 30px;
+	padding: 20px;
+	border-top: 2px solid #dddddd;
+}
+
+#saved-games h2 {
+	color: #555555;
+}
+
+#saved-games-list {
+	list-style-type: none;
+	padding: 0;
+}
+
+.saved-game-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	margin: 5px 0;
+	background-color: #ffc107;
+	color: #212529;
+	border-radius: 4px;
+}
+
+.saved-game-item button {
+	padding: 5px 10px;
+	margin-left: 10px;
+	background-color: #dc3545;
+	color: #ffffff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.saved-game-item button:hover {
+	background-color: #c82333;
+}
+
+.load-game-button {
+	background-color: #007bff;
+}
+
+.load-game-button:hover {
+	background-color: #0069d9;
+}
+
+#game-container {
+	display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Saved Games Section */
+#saved-games-section {
+	padding: 15px;
+	margin-top: 20px;
+	background-color: #fff;
+	border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#saved-games-section h2 {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.saved-games-controls {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+#show-saved-games {
+	padding: 8px 16px;
+	cursor: pointer;
+	background-color: #007bff;
+	color: #ffffff;
+	border: none;
+	border-radius: 4px;
+	transition: background-color 0.3s;
+}
+
+#show-saved-games:hover {
+	background-color: #0056b3;
+}
+
+#saved-games-dropdown {
+	padding: 8px 12px;
+	border-radius: 4px;
+	appearance: none; /* Remove default arrow */
+	background-color: #ffffff;
+	background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5"><polygon points="0,0 10,0 5,5" fill="%23333"/></svg>');
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+	background-size: 10px 5px;
+	cursor: pointer;
+	position: relative;
+}
+
+#saved-games-dropdown.visible {
+	display: block;
+}
+
+#saved-games-dropdown option {
+	padding: 10px;
+}
+
+#delete-saved-game {
+	padding: 8px 16px;
+	cursor: pointer;
+	background-color: #dc3545;
+	color: #ffffff;
+	border: none;
+	border-radius: 4px;
+	transition: background-color 0.3s;
+    margin-top: 8px;
+
+}
+
+#delete-saved-game:hover {
+	background-color: #c82333;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+	.saved-games-controls {
+		flex-direction: column;
+	}
+
+	#saved-games-dropdown {
+		width: 100%;
+	}
+}
+
+#config-section {
+	display: flex;
+	flex-direction: column;
+	width: 20%;
+    padding: 8px 2rem;
+}
+
+
+
+#json-file-input {
+    padding: 24px;
+    border: 1px dashed #5f5f5f;
+    width: 100%;
+    border-radius: 8px;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
