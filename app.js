@@ -41,6 +41,28 @@ document.addEventListener('DOMContentLoaded', () => {
 	const dropSound = document.getElementById('drop-sound');
 	const uploadButton = document.getElementById('upload-json-button');
 	const uploadInput = document.getElementById('json-file-input');
+
+	(function loadGameData() {
+		const urlParams = new URLSearchParams(window.location.search);
+		const gameFile = urlParams.get('game') + '.json';
+
+		if (!gameFile) {
+			console.error('No game parameter in URL');
+			return;
+		}
+
+		fetch(gameFile)
+			.then((response) => response.json())
+			.then((data) => {
+				console.log('Game data:', data);
+				// Use your data here
+				handleConfigSubmit(JSON.stringify(data), false);
+
+			})
+			.catch((error) => {
+				console.error('Error loading game:', error);
+			});
+	})();
 	/**
 	 * Sets up event listeners for configuration submission, buttons, and initializes saved configurations.
 	 */
