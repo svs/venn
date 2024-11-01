@@ -22,7 +22,7 @@ button {
     justify-content: center;
     min-height: 44px; /* Minimum touch target size */
     min-width: 44px;
-    padding: 12px 20px;
+    padding: 2rem 3rem;
     margin: 8px 6px;
     font-size: 40px; /* Larger base font size */
     background-color: #333;
