@@ -31,7 +31,6 @@ button {
     border-radius: 8px;
     cursor: pointer;
     user-select: none;
-    transition: all 0.2s ease;
     text-align: center;
     white-space: nowrap;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
