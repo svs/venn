@@ -262,8 +262,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	 * @param {HTMLElement} wordElem - The word element to add listeners to.
 	 */
 	function addWordEventListeners(wordElem) {
+		
 		// Drag start event
 		wordElem.addEventListener('dragstart', function (e) {
+			wordElem.classList.add('is-dragging');
+
 			draggedWord = this;
 			e.dataTransfer.setData('text/plain', this.textContent);
 			this.style.opacity = '0.5';
@@ -272,6 +275,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// Drag end event
 		wordElem.addEventListener('dragend', function (e) {
+			wordElem.classList.remove('is-dragging');
+
 			this.style.opacity = '1';
 
 			// If the word was not dropped onto a valid target
