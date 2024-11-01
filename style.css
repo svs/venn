@@ -8,7 +8,7 @@ body {
 #word-list {
 	width: 100%;
 	display: flex;
-	overflow: auto;
+	overflow: visible;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
