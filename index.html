@@ -6,26 +6,52 @@
 		<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 		<!-- Include the main CSS file -->
 		<link rel="stylesheet" href="style.css" />
-        
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+				min-height: 100vh;
+				/* Apply the SVG pattern as background */
+				background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1' fill='%23e5e5e5'/%3E%3C/svg%3E");
+				background-repeat: repeat;
+				/* Optional: add a base background color */
+				background-color: white;
+			}
+	
+			/* Alternative method using multiple backgrounds for larger spacing */
+			.alt-dots {
+				background-image: radial-gradient(circle, #e5e5e5 1px, transparent 1px);
+				background-size: 20px 20px;
+			}
+	
+			/* For a more subtle effect */
+			.subtle-dots {
+				background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1' fill='%23e5e5e5'/%3E%3C/svg%3E");
+				background-repeat: repeat;
+			}
+	
+			/* For a denser pattern */
+			.dense-dots {
+				background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='0.5' fill='%23e5e5e5'/%3E%3C/svg%3E");
+				background-repeat: repeat;
+			}
+	
+			/* Example container to show the pattern */
+			.container {
+				width: 100%;
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 20px;
+				min-height: 400px;
+				/* Add a semi-transparent background to make content readable */
+				background-color: rgba(255, 255, 255, 0.9);
+			}
+		</style>
 	</head>
 	<body>
 		<!-- Word List -->
-		<div id="game-container">
-			<div id="word-list">
-				<!-- <h2>Drag these words onto the Venn diagram:</h2> -->
-				<!-- Updated words -->
-				<!--     <div class="word" draggable="true">Dog</div>
-    <div class="word" draggable="true">Cat</div>
-    <div class="word" draggable="true">Parrot</div>
-    <div class="word" draggable="true">Bat</div>
-    <div class="word" draggable="true">Chicken</div>
-    <div class="word" draggable="true">Animal</div>
-    <div class="word" draggable="true">Dolphin</div>
-    <div class="word" draggable="true">Eagle</div>
-    <div class="word" draggable="true">Penguin</div>
-    <div class="word" draggable="true">Goldfish</div> -->
-			</div>
 
+		<div id="game-container">
 			<!-- Venn Diagram -->
 			<div id="venn-diagram">
 				<div id="diagram-container">
@@ -103,56 +129,19 @@
 				</div> -->
 				<p id="hint-message"></p>
 			</div>
-			<div id="config-section">
-                <button id="undo-button">Undo Last Action</button>
-                <button id="hint-button">Get Hints</button>
-					<button id="reset-button">Reset Game</button>
-                    <hr style="height:0.5px;border-width:0;color:gray;background-color:gray;width:100%">
-				<!-- JSON Upload Section -->
-				<div id="json-upload">
-					<input type="file" id="json-file-input" accept=".json" />
-					<button id="upload-json-button">Upload JSON</button>
-					<p id="upload-message"></p>
-				</div>
-                <hr style="height:0.5px;border-width:0;color:gray;background-color:gray;width:100%">
+		</div>
+		<div id="word-list"></div>
 
-				<!-- Configuration Input Section -->
-					<!-- <h4>Configure Game</h4> -->
-					<!-- <textarea
-						id="config-textarea"
-						rows="6"
-						cols="30"
-						placeholder='Paste targetCombinations here, e.g.,
-[
-    ["Animal","Chicken","Eagle","Parrot","Penguin"],
-    ["Animal","Bat","Dolphin","Goldfish","Penguin"],
-    ["Animal","Cat","Dog","Goldfish","Parrot"]
-]'
-					></textarea>
-					<br />
-					<button id="config-submit">Submit Configuration</button> -->
-                    <hr style="height:0.5px;border-width:0;color:gray;background-color:gray;width:100%">
-				<!-- Saved Games Section -->
-				<!-- <div id="saved-games-section"> -->
-					<select id="saved-games-dropdown">
-						<option value="" disabled selected>
-							Show saved games
-						</option>
-						<!-- Saved games will be populated here via JavaScript -->
-					</select>
-                    <br />
-                    
-					<button id="show-saved-games">Load</button>
-					<button id="delete-saved-game">Delete</button>
-				<!-- </div> -->
-                
-			</div>
+		<div id="buttons">
+			<button id="undo-button">Undo</button>
+			<button id="hint-button">Hint</button>
+			<button id="reset-button">Reset</button>
 		</div>
 
 		<!-- Hints Section -->
-		<!--     <div id="hints">
-        <p id="hint-message"></p>
-    </div> -->
+		<div id="hints">
+			<p id="hint-message"></p>
+		</div>
 
 		<!-- Include the main JavaScript file -->
 		<script src="app.js"></script>

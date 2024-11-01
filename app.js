@@ -69,38 +69,38 @@ document.addEventListener('DOMContentLoaded', () => {
 	function setupEventListeners() {
 		// Handle configuration submission
 		// configSubmitButton.addEventListener('click', handleConfigSubmit);
-		document
-			.getElementById('upload-json-button')
-			.addEventListener('click', () => {
-				const fileInput = document.getElementById('json-file-input');
-				const uploadMessage = document.getElementById('upload-message');
+		// document
+		// 	.getElementById('upload-json-button')
+		// 	.addEventListener('click', () => {
+		// 		const fileInput = document.getElementById('json-file-input');
+		// 		const uploadMessage = document.getElementById('upload-message');
 
-				if (fileInput.files.length === 0) {
-					uploadMessage.textContent =
-						'Please select a JSON file to upload.';
-					uploadMessage.style.color = '#dc3545'; // Red color for error
-					return;
-				}
+		// 		if (fileInput.files.length === 0) {
+		// 			uploadMessage.textContent =
+		// 				'Please select a JSON file to upload.';
+		// 			uploadMessage.style.color = '#dc3545'; // Red color for error
+		// 			return;
+		// 		}
 
-				const file = fileInput.files[0];
-				const reader = new FileReader();
+		// 		const file = fileInput.files[0];
+		// 		const reader = new FileReader();
 
-				reader.onload = function (event) {
-					try {
-						const json = JSON.parse(event.target.result);
-						// Validate and handle the JSON data as needed
-						handleConfigSubmit(JSON.stringify(json), true);
-						uploadMessage.textContent =
-							'JSON file uploaded successfully!';
-						uploadMessage.style.color = '#28a745'; // Green color for success
-					} catch (error) {
-						uploadMessage.textContent = 'Invalid JSON file.';
-						uploadMessage.style.color = '#dc3545'; // Red color for error
-					}
-				};
+		// 		reader.onload = function (event) {
+		// 			try {
+		// 				const json = JSON.parse(event.target.result);
+		// 				// Validate and handle the JSON data as needed
+		// 				handleConfigSubmit(JSON.stringify(json), true);
+		// 				uploadMessage.textContent =
+		// 					'JSON file uploaded successfully!';
+		// 				uploadMessage.style.color = '#28a745'; // Green color for success
+		// 			} catch (error) {
+		// 				uploadMessage.textContent = 'Invalid JSON file.';
+		// 				uploadMessage.style.color = '#dc3545'; // Red color for error
+		// 			}
+		// 		};
 
-				reader.readAsText(file);
-			});
+		// 		reader.readAsText(file);
+		// 	});
 		// Handle Reset, Undo, and Hint buttons
 		resetButton.addEventListener('click', resetGame);
 		undoButton.addEventListener('click', undoLastAction);
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Save the configuration to localStorage with Unix timestamp
 		if (save) saveConfiguration(parsedCombinations);
 
-		alert('Game configured successfully!');
+		// alert('Game configured successfully!');
 	}
 
 	/**
