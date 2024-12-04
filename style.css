@@ -20,11 +20,11 @@ button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 40px; /* Minimum touch target size */
+    min-height: 40px; /* Reduced from default */
     min-width: 44px;
-    padding: 1rem;
-    margin: 8px 6px;
-    font-size: 32px; /* Larger base font size */
+    padding: 0.5rem; /* Reduced from 1rem */
+    margin: 4px; /* Reduced from 8px 6px */
+    font-size: 24px; /* Reduced from 32px */
     background-color: #333;
     color: white;
     border: none;
@@ -48,9 +48,9 @@ button:active {
 @media screen and (max-width: 480px) {
     .word,
     button {
-        font-size: 15px;
-        padding: 1rem;
-        margin: 6px 4px;
+        font-size: 13px; /* Reduced from 15px */
+        padding: 0.3rem; /* Reduced from 1rem */
+        margin: 3px; /* Reduced from 6px 4px */
         /* Improve contrast */
         font-weight: 500;
         letter-spacing: 0.3px;
@@ -129,11 +129,12 @@ button:active {
 }
 
 .region {
-	fill: #d9d9d9;
+	fill: #f0f0f0; /* Light gray fill */
 	stroke: #000000; /* Border color */
 	stroke-width: 2; /* Border thickness */
 	cursor: pointer;
 	transition: fill 0.3s, stroke 0.3s;
+	fill-opacity: 0.5; /* Semi-transparent */
 }
 
 .dropped-word {
@@ -174,34 +175,6 @@ button:active {
 
 
 /* Existing CSS styles... */
-
-#region1 {
-	fill: #ff9999; /* Light Red */
-}
-
-#region2 {
-	fill: #99ff99; /* Light Green */
-}
-
-#region3 {
-	fill: #9999ff; /* Light Blue */
-}
-
-#region4 {
-	fill: #ffff99; /* Light Yellow */
-}
-
-#region5 {
-	fill: #ff99ff; /* Light Pink */
-}
-
-#region6 {
-	fill: #99ffff; /* Light Cyan */
-}
-
-#region7 {
-	fill: #ffcc99; /* Light Orange */
-}
 
 .region:hover {
 	fill: #a1c4fd !important;
