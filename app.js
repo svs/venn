@@ -41,44 +41,66 @@ document.addEventListener('DOMContentLoaded', () => {
 	const dropSound = document.getElementById('drop-sound');
 	const uploadButton = document.getElementById('upload-json-button');
 	const uploadInput = document.getElementById('json-file-input');
+
+	(function loadGameData() {
+		const urlParams = new URLSearchParams(window.location.search);
+		const gameFile = urlParams.get('game') + '.json';
+
+		if (!gameFile) {
+			console.error('No game parameter in URL');
+			return;
+		}
+
+		fetch(gameFile)
+			.then((response) => response.json())
+			.then((data) => {
+				console.log('Game data:', data);
+				// Use your data here
+				handleConfigSubmit(JSON.stringify(data), false);
+
+			})
+			.catch((error) => {
+				console.error('Error loading game:', error);
+			});
+	})();
 	/**
 	 * Sets up event listeners for configuration submission, buttons, and initializes saved configurations.
 	 */
 	function setupEventListeners() {
 		// Handle configuration submission
 		// configSubmitButton.addEventListener('click', handleConfigSubmit);
-		document
-			.getElementById('upload-json-button')
-			.addEventListener('click', () => {
-				const fileInput = document.getElementById('json-file-input');
-				const uploadMessage = document.getElementById('upload-message');
+		// document
+		// 	.getElementById('upload-json-button')
+		// 	.addEventListener('click', () => {
+		// 		const fileInput = document.getElementById('json-file-input');
+		// 		const uploadMessage = document.getElementById('upload-message');
 
-				if (fileInput.files.length === 0) {
-					uploadMessage.textContent =
-						'Please select a JSON file to upload.';
-					uploadMessage.style.color = '#dc3545'; // Red color for error
-					return;
-				}
+		// 		if (fileInput.files.length === 0) {
+		// 			uploadMessage.textContent =
+		// 				'Please select a JSON file to upload.';
+		// 			uploadMessage.style.color = '#dc3545'; // Red color for error
+		// 			return;
+		// 		}
 
-				const file = fileInput.files[0];
-				const reader = new FileReader();
+		// 		const file = fileInput.files[0];
+		// 		const reader = new FileReader();
 
-				reader.onload = function (event) {
-					try {
-						const json = JSON.parse(event.target.result);
-						// Validate and handle the JSON data as needed
-						handleConfigSubmit(JSON.stringify(json), true);
-						uploadMessage.textContent =
-							'JSON file uploaded successfully!';
-						uploadMessage.style.color = '#28a745'; // Green color for success
-					} catch (error) {
-						uploadMessage.textContent = 'Invalid JSON file.';
-						uploadMessage.style.color = '#dc3545'; // Red color for error
-					}
-				};
+		// 		reader.onload = function (event) {
+		// 			try {
+		// 				const json = JSON.parse(event.target.result);
+		// 				// Validate and handle the JSON data as needed
+		// 				handleConfigSubmit(JSON.stringify(json), true);
+		// 				uploadMessage.textContent =
+		// 					'JSON file uploaded successfully!';
+		// 				uploadMessage.style.color = '#28a745'; // Green color for success
+		// 			} catch (error) {
+		// 				uploadMessage.textContent = 'Invalid JSON file.';
+		// 				uploadMessage.style.color = '#dc3545'; // Red color for error
+		// 			}
+		// 		};
 
-				reader.readAsText(file);
-			});
+		// 		reader.readAsText(file);
+		// 	});
 		// Handle Reset, Undo, and Hint buttons
 		resetButton.addEventListener('click', resetGame);
 		undoButton.addEventListener('click', undoLastAction);
@@ -150,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Save the configuration to localStorage with Unix timestamp
 		if (save) saveConfiguration(parsedCombinations);
 
-		alert('Game configured successfully!');
+		// alert('Game configured successfully!');
 	}
 
 	/**
@@ -240,8 +262,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	 * @param {HTMLElement} wordElem - The word element to add listeners to.
 	 */
 	function addWordEventListeners(wordElem) {
+		
 		// Drag start event
 		wordElem.addEventListener('dragstart', function (e) {
+			wordElem.classList.add('is-dragging');
+
 			draggedWord = this;
 			e.dataTransfer.setData('text/plain', this.textContent);
 			this.style.opacity = '0.5';
@@ -250,6 +275,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// Drag end event
 		wordElem.addEventListener('dragend', function (e) {
+			wordElem.classList.remove('is-dragging');
+
 			this.style.opacity = '1';
 
 			// If the word was not dropped onto a valid target

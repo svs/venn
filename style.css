@@ -6,26 +6,92 @@ body {
 }
 
 #word-list {
-	margin-bottom: 20px;
-    width: 10%;
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    padding: 4px 1.5rem;
+	width: 100%;
+	display: flex;
+	overflow: visible;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
 }
 
-.word {
-	display: inline-block;
-	padding: 10px 15px;
-	margin: 5px;
-	background-color: #f0f0f0;
-	cursor: grab;
-	border-radius: 5px;
-	user-select: none;
-	transition: background-color 0.3s;
-    overflow: hidden;
+/* Base button styles */
+.word,
+button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px; /* Minimum touch target size */
+    min-width: 44px;
+    padding: 1rem;
+    margin: 8px 6px;
+    font-size: 32px; /* Larger base font size */
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    user-select: none;
+    text-align: center;
     white-space: nowrap;
-    text-overflow: ellipsis;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.word:active,
+button:active {
+	cursor: grabbing;
+    transform: scale(0.97);
+    background-color: #444;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Specific mobile optimization */
+@media screen and (max-width: 480px) {
+    .word,
+    button {
+        font-size: 15px;
+        padding: 1rem;
+        margin: 6px 4px;
+        /* Improve contrast */
+        font-weight: 500;
+        letter-spacing: 0.3px;
+    }
+
+}
+
+/* Handle devices with coarse pointers (touch screens) */
+@media (pointer: coarse) {
+    .word {
+        /* Optimize for touch */
+        cursor: move;
+        -webkit-touch-callout: none;
+        
+        /* Prevent text selection during drag */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .word {
+        background-color: #2a2a2a;
+        color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .word:active {
+        background-color: #333333;
+    }
+}
+
+/* Optional: Add styles for when element is being dragged */
+.word.is-dragging {
+    opacity: 0.8;
+    transform: scale(1.05);
+    /* background-color: #e0e0e0; */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .word:active {
@@ -41,6 +107,7 @@ body {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+	align-items: center;
 }
 
 #diagram-container {
@@ -77,9 +144,12 @@ body {
 
 #reset-button,
 #undo-button,
-#hint-button, #config-submit {
-	padding: 10px 20px;
-	margin: 20px 0px;
+#hint-button,
+#config-submit {
+	padding: 1rem;
+    margin: 8px 6px;
+    font-size: 32px;
+	/* margin: 20px 0px; */
 	font-size: 16px;
 	cursor: pointer;
 }
@@ -102,11 +172,6 @@ body {
 	border-radius: 4px;
 }
 
-#buttons {
-	display: flex;
-	justify-content: center;
-	width: 100%;
-}
 
 /* Existing CSS styles... */
 
@@ -166,7 +231,7 @@ body {
 	border-radius: 4px;
 	cursor: pointer;
 	transition: background-color 0.3s;
-    width: 100%;
+	width: 100%;
 }
 
 #json-upload button:hover {
@@ -231,8 +296,9 @@ body {
 
 #game-container {
 	display: flex;
-    width: 100vw;
-    height: 100vh;
+	justify-content: center;
+	width: 100vw;
+	height: 80vh;
 }
 
 /* Saved Games Section */
@@ -241,8 +307,8 @@ body {
 	margin-top: 20px;
 	background-color: #fff;
 	border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 #saved-games-section h2 {
@@ -301,8 +367,7 @@ body {
 	border: none;
 	border-radius: 4px;
 	transition: background-color 0.3s;
-    margin-top: 8px;
-
+	margin-top: 8px;
 }
 
 #delete-saved-game:hover {
@@ -324,32 +389,41 @@ body {
 	display: flex;
 	flex-direction: column;
 	width: 20%;
-    padding: 8px 2rem;
+	padding: 8px 2rem;
 }
-
-
 
 #json-file-input {
-    padding: 24px;
-    border: 1px dashed #5f5f5f;
-    width: 100%;
-    border-radius: 8px;
+	padding: 24px;
+	border: 1px dashed #5f5f5f;
+	width: 100%;
+	border-radius: 8px;
 }
 
 @font-face {
-    font-family: 'Inter';
-    src: url('/fonts/Inter-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'Inter';
+	src: url('/fonts/Inter-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Inter';
-    src: url('/fonts/Inter-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
+	font-family: 'Inter';
+	src: url('/fonts/Inter-Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+	font-family: 'Inter', sans-serif;
+}
+
+#buttons {
+	/* position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 4px; */
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 4px;
 }
